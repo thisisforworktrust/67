@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>67 Till...</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #0a0a0a;
+      color: cyan;
+      font-family: Arial, sans-serif;
+      font-size: 2em;
+      text-align: center;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="days"></h1>
+  <h1 id="hours"></h1>
+  <h1 id="minutes"></h1>
+  <h1 id="seconds"></h1>
+
+  <script>
+    function formatTime(date) {
+      const hours = date.getHours() % 12 || 12;
+      const minutes = date.getMinutes().toString().padStart(2, '0');
+      const seconds = date.getSeconds().toString().padStart(2, '0');
+      const ampm = date.getHours() >= 12 ? 'PM' : 'AM';
+      return `${hours}:${minutes}:${seconds} ${ampm}`;
+    }
+
+    function updateAll() {
+      const now = new Date();
+
+      // 67 days later
+      const futureDays = new Date(now.getTime() + 67 * 24 * 60 * 60 * 1000);
+      const futureDaysFormatted = futureDays.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      document.getElementById("days").textContent = `67 days till ${futureDaysFormatted}`;
+
+      // 67 hours later
+      const futureHours = new Date(now.getTime() + 67 * 60 * 60 * 1000);
+      document.getElementById("hours").textContent = `67 hours till ${formatTime(futureHours)}`;
+
+      // 67 minutes later
+      const futureMinutes = new Date(now.getTime() + 67 * 60 * 1000);
+      document.getElementById("minutes").textContent = `67 minutes till ${formatTime(futureMinutes)}`;
+
+      // 67 seconds later
+      const futureSeconds = new Date(now.getTime() + 67 * 1000);
+      document.getElementById("seconds").textContent = `67 seconds till ${formatTime(futureSeconds)}`;
+    }
+
+    // Update immediately and every second
+    updateAll();
+    setInterval(updateAll, 1000);
+  </script>
+</body>
+</html>
